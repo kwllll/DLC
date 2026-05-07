@@ -311,7 +311,7 @@ if st.session_state.page == "checkout":
 
     pivot_df = pivot_df[pivot_df.any(axis=1)] 
 
-    st.markdown("### 📊 比較")
+    st.markdown("### 📊 價格比較")
 
     edited_df = st.data_editor(pivot_df, 
                                 column_order=tuple(pivot_columns),
