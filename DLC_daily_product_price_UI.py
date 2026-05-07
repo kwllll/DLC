@@ -226,7 +226,7 @@ if st.session_state.page == "shop":
             
     # ----------------------------------------------------------------------------------------------------------------------------------------
 
-        st.sidebar.title("🛒 Bookmark")
+        st.sidebar.title("📕 Bookmark")
         if st.session_state.cart:
 
             st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
@@ -270,12 +270,12 @@ if st.session_state.page == "shop":
 
 if st.session_state.page == "checkout":
 
-    st.sidebar.title("🛒 我的購物車")
+    st.sidebar.title("📕 Bookmark")
     if st.session_state.cart:
 
         st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
     else:
-        st.sidebar.write("- 購物車是空的")
+        st.sidebar.write("- Bookmark是空的")
 
     if st.sidebar.button("返回"):
         st.session_state.page = "shop"
@@ -311,7 +311,7 @@ if st.session_state.page == "checkout":
 
     pivot_df = pivot_df[pivot_df.any(axis=1)] 
 
-    st.markdown("### 📊 價格比較")
+    st.markdown("### 📊 比較")
 
     edited_df = st.data_editor(pivot_df, 
                                 column_order=tuple(pivot_columns),
