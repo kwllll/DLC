@@ -226,7 +226,7 @@ if st.session_state.page == "shop":
             
     # ----------------------------------------------------------------------------------------------------------------------------------------
 
-        st.sidebar.title("🛒 我的購物車")
+        st.sidebar.title("🛒 Bookmark")
         if st.session_state.cart:
 
             st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
@@ -249,7 +249,7 @@ if st.session_state.page == "shop":
                         st.rerun()
 
         else:
-            st.sidebar.write("- 購物車是空的")
+            st.sidebar.write("- Bookmark是空的")
 
 
         # # if st.session_state.selected_stock_names:
