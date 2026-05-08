@@ -384,9 +384,10 @@ def clear_text():
     st.session_state.search_word = ""
 
 @st.fragment
-def show_editor(pivot_df):
+def show_editor(pivot_df, pivot_columns):
+    
     edited_df = st.data_editor(pivot_df, 
-                                column_order=tuple(['選擇'] + original_columns),
+                                column_order=tuple(pivot_columns),
                                 width = "content",
                                 height=min(int(len(pivot_df) * 37.5 + 40), 720),
                                 column_config=column_config_dict,
@@ -500,12 +501,11 @@ if st.session_state.page == "shop":
 
             pivot_df = filtered_df.pivot_table(index=['Name', '選擇'], 
                                                 # index = ['品牌', '貨品名稱'],
-                                            columns='超市代號', 
-                                            values='price_discount', 
-                                            aggfunc='first',
-                                            fill_value='-'
-                                            ).reset_index()
-
+                                                columns='超市代號', 
+                                                values='price_discount', 
+                                                aggfunc='first',
+                                                fill_value='-'
+                                                ).reset_index()
 
             # Action when Pressing Enter
             if submitted or search_term:
@@ -519,7 +519,20 @@ if st.session_state.page == "shop":
 
             pivot_df = pivot_df[pivot_df.any(axis=1)] 
 
-            show_editor(pivot_df)
+            try:
+                if '全部' not in st.session_state.shop_list_deafult:
+                    original_columns = [x for x in pivot_df.columns if x != '選擇']
+                    original_columns = [x for x in original_columns if x != 'Name']
+                    original_columns = [x for x in original_columns if x not in st.session_state.shop_list_deafult]
+                    pivot_columns = ['選擇', 'Name'] + st.session_state.shop_list_deafult + original_columns
+                else:
+                    original_columns = [x for x in pivot_df.columns if x != '選擇']
+                    pivot_columns = ['選擇'] + st.session_state.shop_list_deafult + original_columns
+            except:
+                original_columns = [x for x in pivot_df.columns if x != '選擇']
+                pivot_columns = ['選擇'] + original_columns
+
+            show_editor(pivot_df, pivot_columns)
             
     # ----------------------------------------------------------------------------------------------------------------------------------------
 
