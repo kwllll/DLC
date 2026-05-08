@@ -411,7 +411,6 @@ if 'cat2_deafult_text' not in st.session_state:
 
 st.markdown('''<style>
             .block-container { padding-top: 3rem; padding-bottom: 0rem; padding-left: 5rem; padding-right: 5rem; }
-            [data-testid="stSidebar"] { min-width: 400px; max-width: 400px; }
             [data-testid="stSidebarUserContent"] { padding-top: 0rem; }
             [data-testid="stSidebarCollapseButton"] { display: none !important; }
             [data-testid="stTable"] th { text-align: center !important; } 
@@ -481,7 +480,39 @@ if "search_word" not in st.session_state:
 
 if st.session_state.page == "shop":
 
+    # st.sidebar.title("📕 Bookmark")
+    # if st.session_state.cart:
+
+    #     st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
+
+    #     col1, col2 = st.sidebar.columns([4,6])
+
+    #     with col1:
+    #         sub_col1, sub_col2 = st.columns([1, 1], gap = 'small')
+    #         with sub_col1:
+    #             button_1 = st.button("比較", use_container_width=True)
+    #             if button_1:
+    #                 st.session_state.page = "checkout"
+    #                 st.rerun()
+
+    #         with sub_col2:
+    #             button_2 = st.button("清除", key="clear_button", use_container_width=True)
+    #             if button_2:
+    #                 st.session_state.cart = set()
+    #                 st.rerun()
+
+    # else:
+    #     st.sidebar.write("- Bookmark是空的")
+
+    # ---------------------------------------------------------------------------------------------------------------------------------------
+
     # Side Bar
+
+    st.markdown('''<style>
+                [data-testid="stSidebar"] { min-width: 400px; max-width: 400px; }
+                </style>
+                '''
+                , unsafe_allow_html=True)
 
     if 'is_cat2_expanded' not in st.session_state:
         st.session_state['is_cat2_expanded'] = False
@@ -563,6 +594,7 @@ if st.session_state.page == "shop":
             st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
             if st.button("Save", key = "save_button"):
                 pass
+                # st.session_state['is_cat2_expanded'] = False
     
         st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
 
@@ -604,7 +636,7 @@ if st.session_state.page == "shop":
                 pivot_columns = ['選擇'] + original_columns
 
             show_editor(pivot_df, pivot_columns)
-            
+
     # ----------------------------------------------------------------------------------------------------------------------------------------
 
         st.sidebar.title("📕 Bookmark")
@@ -631,6 +663,7 @@ if st.session_state.page == "shop":
         else:
             st.sidebar.write("- Bookmark是空的")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------
 
         # # if st.session_state.selected_stock_names:
         # st.sidebar.subheader("🛒 購物車明細")
@@ -651,17 +684,22 @@ if st.session_state.page == "shop":
 
 if st.session_state.page == "checkout":
 
-    st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
+    st.markdown("""
+                <style> 
+                div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px;} 
+                [data-testid="stSidebar"] { min-width: 250px; max-width: 250px; }
+                </style> 
+                """,
+                unsafe_allow_html=True,)
 
     st.sidebar.title("📕 Bookmark")
     if st.session_state.cart:
-
         st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
     else:
         st.sidebar.write("- Bookmark是空的")
 
 
-    col1, col2 = st.sidebar.columns([4,6])
+    col1, col2 = st.sidebar.columns([8,2])
     with col1:
         sub_col1, sub_col2 = st.columns([1, 1], gap = 'small')
         with sub_col1:
