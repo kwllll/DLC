@@ -512,7 +512,7 @@ if st.session_state.page == "shop":
                 pivot_df = pivot_df[pivot_df['Name'].str.contains(search_term, case=False, na=False)]
 
             column_config_dict = {col: st.column_config.Column(width=estimate_width(pivot_df[col]), disabled=True) for col in pivot_df.columns}
-            column_config_dict["選擇"] = st.column_config.CheckboxColumn("Selected",help="勾選欲購買的商品",default=False)
+            column_config_dict["選擇"] = st.column_config.CheckboxColumn("Bookmark",help="勾選欲購買的商品",default=False)
             
             original_columns = [x for x in pivot_df.columns if x != '選擇']
             pivot_df['選擇'] = pivot_df['Name'].apply( lambda x: x in st.session_state.cart )
