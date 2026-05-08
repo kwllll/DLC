@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
-import dataframe_image as dfi
-from io import BytesIO
+
 
 def discount_calculation(row):
 
