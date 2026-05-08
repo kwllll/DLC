@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import re
+import dataframe_image as dfi
+from io import BytesIO
 
 def discount_calculation(row):
 
@@ -308,6 +310,7 @@ def load_and_process_data():
     return df
 
 df = load_and_process_data()
+df_page2 = load_and_process_data()
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -594,8 +597,6 @@ if st.session_state.page == "checkout":
     #     st.session_state.page = "shop"
     #     st.rerun()
 
-    df_page2 = load_and_process_data()
-
     filtered_df = df_page2.copy()
 
     filtered_df = filtered_df[filtered_df['Name'].isin(st.session_state.cart)]
@@ -626,9 +627,7 @@ if st.session_state.page == "checkout":
 
     pivot_df['選擇'] = pivot_df['Name'].apply( lambda x: x in st.session_state.cart )
 
-    pivot_df = pivot_df[pivot_df.any(axis=1)] 
-
-    st.markdown("### 📊 價格比較")
+    st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
 
     edited_df = st.data_editor(pivot_df, 
                                 column_order=tuple(pivot_columns),
