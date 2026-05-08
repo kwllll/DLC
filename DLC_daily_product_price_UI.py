@@ -457,7 +457,7 @@ if st.session_state.page == "shop":
     
     except:
         st.write(f"請選擇超市")
-        # filtered_df = pd.DataFrame()
+        filtered_df = pd.DataFrame()
 
 
     # ---------------------------------------------------------------------------------------------------------------------------------------
@@ -617,6 +617,9 @@ if st.session_state.page == "checkout":
             original_columns = [x for x in original_columns if x != 'Name']
             original_columns = [x for x in original_columns if x not in st.session_state.shop_list_deafult]
             pivot_columns = ['選擇', 'Name'] + st.session_state.shop_list_deafult + original_columns
+        else:
+            original_columns = [x for x in pivot_df.columns if x != '選擇']
+            pivot_columns = ['選擇'] + st.session_state.shop_list_deafult + original_columns
     except:
         original_columns = [x for x in pivot_df.columns if x != '選擇']
         pivot_columns = ['選擇'] + original_columns
