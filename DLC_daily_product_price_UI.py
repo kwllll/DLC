@@ -460,101 +460,105 @@ if st.session_state.page == "shop":
 
     # ---------------------------------------------------------------------------------------------------------------------------------------
 
-    # Display Table
-    if not filtered_df.empty:
-
-        # Search Bar and button
-        col1, col2 = st.columns([10, 1.55], gap="small") # 調整比例讓按鈕在右側
-        with col1:
-            search_term = st.text_input("🔍 搜尋商品名稱", placeholder="輸入名稱...", key="search_word")
-        with col2:
-            sub_col1, sub_col2 = st.columns([1, 2], gap = 'small')
-            with sub_col1:
-                st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
-                submitted = st.button("搜尋")
-            with sub_col2:
-                st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
-                clear = st.button("🧹 清除搜尋", key="clear_button_2", on_click=clear_text)
-
-        
-
-        col1, col2, col3 = st.columns([1.1, 1, 7.9], vertical_alignment="bottom", gap = "small")
-        with col1:
-            st.markdown("#### 📊 價格比較")
-
-        with col2:
-            st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
-            if st.button("Save", key = "save_button"):
-                pass
-    
-        st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
-
-    # --------------------------------------------------------------------------------------------------------------------------------------
-
+    try:
+        # Display Table
         if not filtered_df.empty:
 
-            pivot_df = filtered_df.pivot_table(index=['Name', '選擇'], 
-                                                # index = ['品牌', '貨品名稱'],
-                                            columns='超市代號', 
-                                            values='price_discount', 
-                                            aggfunc='first',
-                                            fill_value='-'
-                                            ).reset_index()
-
-
-            # Action when Pressing Enter
-            if submitted or search_term:
-                pivot_df = pivot_df[pivot_df['Name'].str.contains(search_term, case=False, na=False)]
-
-            column_config_dict = {col: st.column_config.Column(width=estimate_width(pivot_df[col]), disabled=True) for col in pivot_df.columns}
-            column_config_dict["選擇"] = st.column_config.CheckboxColumn("Selected",help="勾選欲購買的商品",default=False)
-            
-            original_columns = [x for x in pivot_df.columns if x != '選擇']
-            pivot_df['選擇'] = pivot_df['Name'].apply( lambda x: x in st.session_state.cart )
-
-            pivot_df = pivot_df[pivot_df.any(axis=1)] 
-
-            show_editor(pivot_df)
-            
-    # ----------------------------------------------------------------------------------------------------------------------------------------
-
-        st.sidebar.title("📕 Bookmark")
-        if st.session_state.cart:
-
-            st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
-
-            col1, col2 = st.sidebar.columns([4,6])
-
+            # Search Bar and button
+            col1, col2 = st.columns([10, 1.55], gap="small") # 調整比例讓按鈕在右側
             with col1:
-                sub_col1, sub_col2 = st.columns([1, 1], gap = 'small')
+                search_term = st.text_input("🔍 搜尋商品名稱", placeholder="輸入名稱...", key="search_word")
+            with col2:
+                sub_col1, sub_col2 = st.columns([1, 2], gap = 'small')
                 with sub_col1:
-                    button_1 = st.button("比較", use_container_width=True)
-                    if button_1:
-                        st.session_state.page = "checkout"
-                        st.rerun()
-
+                    st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
+                    submitted = st.button("搜尋")
                 with sub_col2:
-                    button_2 = st.button("清除", key="clear_button", use_container_width=True)
-                    if button_2:
-                        st.session_state.cart = set()
-                        st.rerun()
+                    st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
+                    clear = st.button("🧹 清除搜尋", key="clear_button_2", on_click=clear_text)
+
+            
+
+            col1, col2, col3 = st.columns([1.1, 1, 7.9], vertical_alignment="bottom", gap = "small")
+            with col1:
+                st.markdown("#### 📊 價格比較")
+
+            with col2:
+                st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
+                if st.button("Save", key = "save_button"):
+                    pass
+        
+            st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
+
+        # --------------------------------------------------------------------------------------------------------------------------------------
+
+            if not filtered_df.empty:
+
+                pivot_df = filtered_df.pivot_table(index=['Name', '選擇'], 
+                                                    # index = ['品牌', '貨品名稱'],
+                                                columns='超市代號', 
+                                                values='price_discount', 
+                                                aggfunc='first',
+                                                fill_value='-'
+                                                ).reset_index()
+
+
+                # Action when Pressing Enter
+                if submitted or search_term:
+                    pivot_df = pivot_df[pivot_df['Name'].str.contains(search_term, case=False, na=False)]
+
+                column_config_dict = {col: st.column_config.Column(width=estimate_width(pivot_df[col]), disabled=True) for col in pivot_df.columns}
+                column_config_dict["選擇"] = st.column_config.CheckboxColumn("Selected",help="勾選欲購買的商品",default=False)
+                
+                original_columns = [x for x in pivot_df.columns if x != '選擇']
+                pivot_df['選擇'] = pivot_df['Name'].apply( lambda x: x in st.session_state.cart )
+
+                pivot_df = pivot_df[pivot_df.any(axis=1)] 
+
+                show_editor(pivot_df)
+                
+        # ----------------------------------------------------------------------------------------------------------------------------------------
+
+            st.sidebar.title("📕 Bookmark")
+            if st.session_state.cart:
+
+                st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
+
+                col1, col2 = st.sidebar.columns([4,6])
+
+                with col1:
+                    sub_col1, sub_col2 = st.columns([1, 1], gap = 'small')
+                    with sub_col1:
+                        button_1 = st.button("比較", use_container_width=True)
+                        if button_1:
+                            st.session_state.page = "checkout"
+                            st.rerun()
+
+                    with sub_col2:
+                        button_2 = st.button("清除", key="clear_button", use_container_width=True)
+                        if button_2:
+                            st.session_state.cart = set()
+                            st.rerun()
+
+            else:
+                st.sidebar.write("- Bookmark是空的")
+
+
+            # # if st.session_state.selected_stock_names:
+            # st.sidebar.subheader("🛒 購物車明細")
+            # for name in st.session_state.selected_stock_names:
+            #     st.sidebar.write(f"- {name}")
+                
+                # if st.sidebar.button("清空購物車"):
+                #     st.session_state.selected_stock_names.clear()
+                #     st.rerun()
+
+        # ----------------------------------------------------------------------------------------------------------------------------------------
 
         else:
-            st.sidebar.write("- Bookmark是空的")
-
-
-        # # if st.session_state.selected_stock_names:
-        # st.sidebar.subheader("🛒 購物車明細")
-        # for name in st.session_state.selected_stock_names:
-        #     st.sidebar.write(f"- {name}")
-            
-            # if st.sidebar.button("清空購物車"):
-            #     st.session_state.selected_stock_names.clear()
-            #     st.rerun()
-
-    # ----------------------------------------------------------------------------------------------------------------------------------------
-
-    else:
+            st.warning("請選擇超市")
+    
+    except:
         st.warning("請選擇超市")
 
 # ================================================================================================================================================
