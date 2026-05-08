@@ -310,8 +310,8 @@ def discount_calculation(row):
         # text = f'買{text_quantity}送{text_quantity_free}'
         text = f'${text_discount}/{text_quantity}件'
 
-    elif match_pattern_42:
-        temp = match_pattern_42
+    elif match_pattern_43:
+        temp = match_pattern_43
         text_quantity = temp.group('total')
         text_quantity_free = temp.group('free')
         text_quantity_price = int(text_quantity) - int(text_quantity_free)
