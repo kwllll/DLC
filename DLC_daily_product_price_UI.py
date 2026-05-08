@@ -639,3 +639,6 @@ if st.session_state.page == "checkout":
                                 args=(pivot_df,),
                                 num_rows="fixed"
                                 )
+    
+
+# kwllll: 9/5/2026
