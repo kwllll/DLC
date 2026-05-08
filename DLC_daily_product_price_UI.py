@@ -87,13 +87,19 @@ def discount_calculation(row):
         temp = match_pattern_9    
         text_quantity = temp.group('qty')
         text_quantity_free = temp.group('free_qty')
-        text = f'買{text_quantity}送{text_quantity_free}'
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
          
     elif match_pattern_10:
         temp = match_pattern_10    
         text_quantity = temp.group('buy')
         text_quantity_free = temp.group('gift')
-        text = f'買{text_quantity}送{text_quantity_free}'  
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
         
     elif match_pattern_11:
         temp = match_pattern_11    
@@ -111,7 +117,10 @@ def discount_calculation(row):
         temp = match_pattern_13   
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}'  
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
 
     elif match_pattern_14:
         temp = match_pattern_14   
@@ -129,19 +138,28 @@ def discount_calculation(row):
         temp = match_pattern_16   
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('free_qty')
-        text = f'買{text_quantity}送{text_quantity_free}'
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
 
     elif match_pattern_17:
         temp = match_pattern_17   
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}'  
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
         
     elif match_pattern_18:
         temp = match_pattern_18   
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}' 
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
 
     elif match_pattern_19:
         temp = match_pattern_19   
@@ -159,7 +177,10 @@ def discount_calculation(row):
         temp = match_pattern_21   
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}' 
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
 
     elif match_pattern_22:
         temp = match_pattern_22  
@@ -195,19 +216,28 @@ def discount_calculation(row):
         temp = match_pattern_27  
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}'  
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件' 
         
     elif match_pattern_28:
         temp = match_pattern_28  
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}' 
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
         
     elif match_pattern_29:
         temp = match_pattern_29  
         text_quantity = temp.group('buy_qty')
         text_quantity_free = temp.group('gift_qty')
-        text = f'買{text_quantity}送{text_quantity_free}' 
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
         
     elif match_pattern_30:
         temp = match_pattern_30  
@@ -242,7 +272,10 @@ def discount_calculation(row):
         temp = match_pattern_35  
         text_quantity = temp.group('qty')
         text_quantity_free = temp.group('gift')
-        text = f'買{text_quantity}送{text_quantity_free}'
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
         
     elif match_pattern_38:
         temp = match_pattern_38  
@@ -271,7 +304,10 @@ def discount_calculation(row):
         temp = match_pattern_42
         text_quantity = temp.group('qty')
         text_quantity_free = temp.group('gift')
-        text = f'買{text_quantity}送{text_quantity_free}'   
+        text_discount = int(price_df * int(text_quantity))
+        text_quantity = int(text_quantity) + int(text_quantity_free)
+        # text = f'買{text_quantity}送{text_quantity_free}'
+        text = f'${text_discount}/{text_quantity}件'
     
     else:
         text = row['優惠']
