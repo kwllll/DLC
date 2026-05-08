@@ -584,18 +584,16 @@ if st.session_state.page == "shop":
                 st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
                 clear = st.button("🧹 清除搜尋", key="clear_button_2", on_click=clear_text, use_container_width=True)
 
-        
+        # col1, col2, col3 = st.columns([1.3, 1, 7.7], vertical_alignment="bottom", gap = "small")
+        # with col1:
+        #     st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
 
-        col1, col2, col3 = st.columns([1.3, 1, 7.7], vertical_alignment="bottom", gap = "small")
-        with col1:
-            st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
-
-        with col2:
-            st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
-            if st.button("Save", key = "save_button"):
-                pass
-                # st.session_state['is_cat2_expanded'] = False
-    
+        # with col2:
+        #     st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
+        #     if st.button("Save", key = "save_button"):
+        #         pass
+                
+        st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
         st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
 
     # --------------------------------------------------------------------------------------------------------------------------------------
