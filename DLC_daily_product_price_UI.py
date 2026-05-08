@@ -50,7 +50,7 @@ def discount_calculation(row):
     match_pattern_40 = re.search(r"^(第二件(?P<discount>\d+(\.\d+)?)%\s*折扣)$", discount_df)
     match_pattern_41 = re.search(r"^(買(?P<qty>\d+(?:\.\d+)?)件或以上(?P<discount>\d+(?:\.\d+)?)折)$", discount_df)
     match_pattern_42 = re.search(r"^(買(?P<qty>\d+(?:\.\d+)?)\s*送\s*(?P<gift>\d+(?:\.\d+)?))$", discount_df)
-    match_pattern_43 = re.search(r"(?P<pattern>^(?:任[選揀])?\s*(?P<total>\d+)\s*件.*?(?:其中)?\s*(?P<free>\d+)\s*件\s*(?:免費|送|贈))?$", discount_df)
+    match_pattern_43 = re.search(r"(?P<total>\d+)件.*?(?P<gift>\d+)件.*?(免費|送)", discount_df)
                     
     if match_pattern_2:
         temp = match_pattern_2
@@ -313,7 +313,7 @@ def discount_calculation(row):
     elif match_pattern_43:
         temp = match_pattern_43
         text_quantity = temp.group('total')
-        text_quantity_free = temp.group('free')
+        text_quantity_free = temp.group('gift')
         text_quantity_price = int(text_quantity) - int(text_quantity_free)
         text_discount = int(price_df * int(text_quantity_price))
         # text = f'買{text_quantity}送{text_quantity_free}'
