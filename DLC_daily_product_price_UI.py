@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
-
+import urllib.parse
 
 def discount_calculation(row):
 
@@ -382,6 +382,15 @@ def load_and_process_data():
 df = load_and_process_data()
 df_page2 = load_and_process_data()
 
+super_market_mapping_dict = {'Wellcome': '惠康',
+                            'Parknshop': '百佳',
+                            'Jasons': 'Market Place',
+                            'Aeon': 'AEON',
+                            'Lungfung': '龍豐',
+                            'Mannings': '萬寧',
+                            'Watsons': '屈臣氏',
+                            'Dchfood': '大昌食品',
+                            'Sasa': '莎莎'}
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -422,7 +431,7 @@ st.markdown('''<style>
             div.st-key-clear_button_2 button:hover { background-color: #b80202 !important; color: white !important; }
             div.st-key-save_button button { background-color: #015701 !important; color: white !important; border: none; }
             div.st-key-save_button button:hover { background-color: #018001 !important; color: white !important; }
-            div[data-testid="stButton"] button { white-space: nowrap; font-size: clamp(0.7rem, 1.2vw, 1.1rem) !important; padding: 0.25rem 0.5rem !important;}
+            div[data-testid="stButton"] button { white-space: nowrap; font-size: clamp(0.7rem, 1.2vw, 1.1rem) !important; padding: 0.25rem 0.5rem !important; padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px;}
             </style>
             '''
             , unsafe_allow_html=True)
@@ -584,17 +593,20 @@ if st.session_state.page == "shop":
                 st.markdown('<p style="margin-top:34px;"></p>', unsafe_allow_html=True)
                 clear = st.button("🧹 清除搜尋", key="clear_button_2", on_click=clear_text, use_container_width=True)
 
-        # col1, col2, col3 = st.columns([1.3, 1, 7.7], vertical_alignment="bottom", gap = "small")
-        # with col1:
-        #     st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
+        if len(st.session_state.cart) == 0:
+            with st.container(horizontal=True, vertical_alignment="bottom", horizontal_alignment="left"):
+                st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
+                st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
+                if st.button("Save", key = "save_button"):
+                    pass
+        else:   
+            st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True)
 
-        # with col2:
-        #     st.html(""" <style> div[data-testid="stButton"] button { padding-top: 0px; padding-bottom: 0px; height: 32px;min-height: 32px; } </style> """)
-        #     if st.button("Save", key = "save_button"):
-        #         pass
-                
-        st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
-        st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
+        if '全部' not in selected_shop:
+            selected_shop = ['[' + x + ']' + f'(https://www.google.com/maps/search/{urllib.parse.quote(super_market_mapping_dict[x])})' for x in selected_shop]
+            st.write(f"當前分類：{' & '.join(selected_shop)} > {selected_cat1} > {selected_cat2}")
+        else:
+            st.write(f"當前分類：全部 > {selected_cat1} > {selected_cat2}")
 
     # --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -691,6 +703,7 @@ if st.session_state.page == "checkout":
                 unsafe_allow_html=True,)
 
     st.sidebar.title("📕 Bookmark")
+
     if st.session_state.cart:
         st.sidebar.write(f"- 已選擇{len(st.session_state.cart)}件貨品")
     else:
@@ -746,6 +759,11 @@ if st.session_state.page == "checkout":
 
     pivot_df['選擇'] = pivot_df['Name'].apply( lambda x: x in st.session_state.cart )
 
+    st.markdown( '#### <span style="white-space: nowrap">🗺️ 超市地點</span>', unsafe_allow_html=True )
+
+    selected_shop = ['[' + x + ']' + f'(https://www.google.com/maps/search/{urllib.parse.quote(super_market_mapping_dict[x])})' for x in df_page2['超市代號'].unique().tolist()]
+    st.write(f"超市：{' | '.join(selected_shop)}")
+
     st.markdown( '#### <span style="white-space: nowrap">📊 價格比較</span>', unsafe_allow_html=True )
 
     edited_df = st.data_editor(pivot_df, 
@@ -759,6 +777,9 @@ if st.session_state.page == "checkout":
                                 args=(pivot_df,),
                                 num_rows="fixed"
                                 )
+
+
+    
     
 
 # kwllll: 8/5/2026
