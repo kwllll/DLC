@@ -395,7 +395,7 @@ def discount_calculation(row):
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 
-# @st.cache_data(ttl=300)
+@st.cache_data(ttl=300)
 def load_and_process_data():
     df = pd.read_csv("https://online-price-watch.consumer.org.hk/opw/opendata/pricewatch_zh-Hant.csv")
     df['Name'] = df['品牌'] + ' - ' + df['貨品名稱']
