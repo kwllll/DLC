@@ -407,7 +407,7 @@ def load_and_process_data():
     df_na = df[df['優惠'] == '-']
     df_na['price_discount'] = df_na['價格'].astype(str)
     df_not_na = df[~(df['優惠'] == '-')]
-    df_not_na['price_discount'] = df_not_na['價格'].astype(str) + ' (' + df_not_na['discount_v2'] + ')'
+    df_not_na['price_discount'] = df_not_na['價格'].astype(str) + ' - (' + df_not_na['discount_v2'] + ')'
     df = pd.concat([df_na, df_not_na], ignore_index = False)
 
     df["選擇"] = False
