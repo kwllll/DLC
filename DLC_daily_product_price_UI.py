@@ -59,7 +59,7 @@ def discount_calculation(row):
         temp = match_pattern_2
         text_quantity = temp.group('qty')
         text_price = temp.group('price')
-        text_price_per_item = int(int(float(text_price))/int(text_quantity))
+        text_price_per_item = round(float(int(float(text_price))/int(text_quantity)),2)
         text = f'${text_price}/{text_quantity}件/${text_price_per_item}'
     
     elif match_pattern_4:
@@ -74,21 +74,21 @@ def discount_calculation(row):
         temp = match_pattern_5
         text_quantity = temp.group('qty')
         text_price = temp.group('price')
-        text_price_per_item = int(int(float(text_price))/int(text_quantity))
+        text_price_per_item = round(float(int(float(text_price))/int(text_quantity)),2)
         text = f'${text_price}/{text_quantity}件/${text_price_per_item}'
         
     elif match_pattern_7:
         temp = match_pattern_7       
         text_quantity = temp.group('qty')
         text_discount = int((100 - int(temp.group('discount')))/100 * int(text_quantity) * price_df)
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_8:
         temp = match_pattern_8     
         text_quantity = temp.group('qty')
         text_price = temp.group('price')
-        text_price_per_item = int(int(float(text_price))/int(text_quantity))
+        text_price_per_item = round(float(int(float(text_price))/int(text_quantity)),2)
         text = f'${text_price}/{text_quantity}件/${text_price_per_item}'
         
     elif match_pattern_9:
@@ -98,7 +98,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
          
     elif match_pattern_10:
@@ -108,21 +108,21 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_11:
         temp = match_pattern_11    
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
          
     elif match_pattern_12:
         temp = match_pattern_12   
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_13:
@@ -132,21 +132,21 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_14:
         temp = match_pattern_14   
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_15:
         temp = match_pattern_15   
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_16:
@@ -156,7 +156,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_17:
@@ -166,7 +166,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_18:
@@ -176,21 +176,21 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_19:
         temp = match_pattern_19   
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
      
     elif match_pattern_20:
         temp = match_pattern_20   
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}'  
 
     elif match_pattern_21:
@@ -200,42 +200,42 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_22:
         temp = match_pattern_22  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_23:
         temp = match_pattern_23  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_24:
         temp = match_pattern_24  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_25:
         temp = match_pattern_25  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_26:
         temp = match_pattern_26  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}'   
 
     elif match_pattern_27:
@@ -245,7 +245,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_28:
@@ -255,7 +255,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_29:
@@ -265,7 +265,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_30:
@@ -278,28 +278,28 @@ def discount_calculation(row):
         temp = match_pattern_31  
         text_quantity = temp.group('qty')
         text_discount = int(float('0.' + temp.group('discount')) * price_df * int(text_quantity))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_32:
         temp = match_pattern_32  
         text_quantity = temp.group('qty')
         text_discount = int(price_df * int(text_quantity) - price_df + int(temp.group('price')))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_33:
         temp = match_pattern_33  
         text_quantity = temp.group('qty')
         text_discount = int(price_df * int(text_quantity) - int(float(temp.group('price'))))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}'   
         
     elif match_pattern_34:
         temp = match_pattern_34  
         text_quantity = temp.group('amount')
         text_discount = int(price_df * int(text_quantity) - int(float(temp.group('save'))))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_35:
@@ -309,21 +309,21 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_38:
         temp = match_pattern_38  
         text_quantity = temp.group('index')
         text_discount = int(price_df * int(text_quantity) - price_df * 0.5)
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}'    
         
     elif match_pattern_39:
         temp = match_pattern_39  
         text_quantity = temp.group('qty')
         text_price = temp.group('price')
-        text_price_per_item = int(int(float(text_price))/int(text_quantity))
+        text_price_per_item = round(float(int(float(text_price))/int(text_quantity)),2)
         text = f'${text_price}/{text_quantity}件/${text_price_per_item}' 
         
     elif match_pattern_40:
@@ -345,7 +345,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_43:
@@ -355,7 +355,7 @@ def discount_calculation(row):
         text_quantity_price = int(text_quantity) - int(text_quantity_free)
         text_discount = int(price_df * int(text_quantity_price))
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_44:
@@ -365,7 +365,7 @@ def discount_calculation(row):
         text_discount = int(price_df * int(text_quantity))
         text_quantity = int(text_quantity) + int(text_quantity_free)
         # text = f'買{text_quantity}送{text_quantity_free}'
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
 
     elif match_pattern_45:
@@ -373,7 +373,7 @@ def discount_calculation(row):
         text_quantity = temp.group('quantity')
         text_discount = temp.group('discount')
         text_discount = int(price_df * int(text_quantity) * float('0.' + text_discount))
-        text_price_per_item = int(int(text_discount)/int(text_quantity))
+        text_price_per_item = round(float(int(text_discount)/int(text_quantity)),2)
         text = f'${text_discount}/{text_quantity}件/${text_price_per_item}' 
     
     elif match_pattern_46:
